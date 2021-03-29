@@ -15,12 +15,15 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  before_script:
+  test:
+    runs-on: ubuntu-latest
+  steps:
+    # Before script
     - npm install -q --no-color --no-progress
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     - ./cc-test-reporter before-build
-  script:
+    # Script
     - npm run test:coverage
-  after_script:
+    # After script
     - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

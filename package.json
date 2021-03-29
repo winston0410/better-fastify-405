@@ -34,7 +34,8 @@
     }
   },
   "peerDependencies": {
-    "fastify": "3.x"
+    "fastify": "3.x",
+    "fastify-plugin": "3.x"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "17.1.0",

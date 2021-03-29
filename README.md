@@ -2,6 +2,8 @@
 
 A simple Fastify plugin for handling 405 gracefully.
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/23557cfcd9416cc4f098/maintainability)](https://codeclimate.com/github/winston0410/better-fastify-405/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/23557cfcd9416cc4f098/test_coverage)](https://codeclimate.com/github/winston0410/better-fastify-405/test_coverage) 
+
 ## Why do I need this?
 
 By default [Fastify suppress error 405](https://github.com/fastify/fastify/issues/917) and with return 404 instead. A 405 error would improve the development experience.

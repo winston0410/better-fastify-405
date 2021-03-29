@@ -1,0 +1,66 @@
+{
+  "name": "better-fastify-405",
+  "version": "0.1.0",
+  "description": "A better plugin for handling 405 in Fastify",
+  "author": "Hugo Sum",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "npx rollup -c",
+    "test": "npx jest",
+    "test:coverage": "npx jest --coverage",
+    "test:watch": "npx jest --watch",
+    "prepublish": "yarn build"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "npx prettier --write"
+    ]
+  },
+  "keywords": [
+    "fastify",
+    "fastify-plugin",
+    "fastify-405"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "peerDependencies": {
+    "fastify": "3.x"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "17.1.0",
+    "@rollup/plugin-node-resolve": "11.1.1",
+    "@types/jest": "26.0.20",
+    "@types/node": "^14.14.37",
+    "@typescript-eslint/eslint-plugin": "4.15.0",
+    "@typescript-eslint/parser": "4.15.0",
+    "eslint": "7.20.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-chai-expect": "2.2.0",
+    "eslint-plugin-chai-friendly": "0.6.0",
+    "eslint-plugin-const-immutable": "2.1.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-standard": "5.0.0",
+    "fastify": "^3.14.1",
+    "fastify-plugin": "^3.0.0",
+    "husky": "5.0.9",
+    "jest": "26.6.3",
+    "lint-staged": "10.5.4",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "ts-jest": "^26.5.4",
+    "tslib": "2.1.0",
+    "typescript": "4.1.5"
+  }
+}

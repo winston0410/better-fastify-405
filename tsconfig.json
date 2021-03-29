@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"target": "es2020",
+		"moduleResolution": "node",
+		"declaration": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["./**/*"],
+	"strictNullChecks": true,
+	"noImplicitThis": true,
+	"strictBindCallApply": true,
+	"noImplicitAny": true
+}

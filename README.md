@@ -2,7 +2,7 @@
 
 A simple Fastify plugin for handling 405 gracefully.
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/23557cfcd9416cc4f098/maintainability)](https://codeclimate.com/github/winston0410/better-fastify-405/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/23557cfcd9416cc4f098/test_coverage)](https://codeclimate.com/github/winston0410/better-fastify-405/test_coverage) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/23557cfcd9416cc4f098/maintainability)](https://codeclimate.com/github/winston0410/better-fastify-405/maintainability) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a88113b4d6ac4acbb90be5864aacae27)](https://www.codacy.com/gh/winston0410/better-fastify-405/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=winston0410/better-fastify-405&amp;utm_campaign=Badge_Grade) [![Test Coverage](https://api.codeclimate.com/v1/badges/23557cfcd9416cc4f098/test_coverage)](https://codeclimate.com/github/winston0410/better-fastify-405/test_coverage) 
 
 ## Why do I need this?
 

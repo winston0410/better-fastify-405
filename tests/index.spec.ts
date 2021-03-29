@@ -1,3 +1,4 @@
+import {jest} from '@jest/globals'
 import fastify, {
 	FastifyInstance,
 	FastifyPluginOptions,
@@ -5,6 +6,20 @@ import fastify, {
 	FastifyReply
 } from 'fastify'
 import fastify405 from '../index'
+
+describe('when no routes is registered through better-fastify-405', function (){
+	it('should return early and become a noop', function (){
+		const app: FastifyInstance = fastify({
+			logger: false
+		})
+		
+		const addHookMock = jest.spyOn(app, 'addHook');
+
+		app.register(fastify405)
+
+		expect(addHookMock).toBeCalledTimes(0)
+	})
+})
 
 describe('when a route is registered through better-fastify-405', function() {
 	describe('when a route is accessed by its defined method', function() {

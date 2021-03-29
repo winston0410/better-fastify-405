@@ -21,6 +21,10 @@ async function plugin(
   opts: FastifyPluginOptions,
   done: HookHandlerDoneFunction
 ) {
+  if(!opts.routes){
+    return done()
+  }
+  
   const routes = {};
 
   fastify.addHook("onRoute", function(opts) {

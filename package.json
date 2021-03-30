@@ -1,6 +1,6 @@
 {
   "name": "better-fastify-405",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A better plugin for handling 405 in Fastify",
   "author": "Hugo Sum",
   "license": "MIT",

@@ -52,3 +52,27 @@ app.register(import('plugins/better-fastify-405'), {
   }
 })
 ```
+
+### Do not mark `OPTIONS` route with 405
+
+A function `allowCORS` is provided to help you not mark `OPTIONS` for 405.
+
+```javascript
+import better405, { allowCORS } from 'better-fastify-405'
+
+import fastify, { FastifyRequest, FastifyReply, FastifyInstance, HookHandlerDoneFunction, RouteOptions } from 'fastify';
+
+const app: FastifyInstance = fastify({
+  logger: true
+})
+
+//Other plugins
+app.register(import("fastify-etag"))
+app.register(better405, {
+  routes: [
+    import('./routes/index'),
+    import('./routes/protected')
+  ],
+  filterCallback: allowCORS
+})
+```

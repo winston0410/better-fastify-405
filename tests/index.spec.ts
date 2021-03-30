@@ -117,8 +117,8 @@ describe('when a route is registered through better-fastify-405', function() {
 })
 
 describe('when a route is registered through better-fastify-405', function (){
-	describe('when a custom callback is used to filter out a route', function (){
-		describe('when the route is accessed', function (){
+	describe('when a custom callback is used to filter out a method', function (){
+		describe('when a route is accessed with a filter out method', function (){
 			const app: FastifyInstance = fastify({
 				logger: false
 			})
@@ -154,10 +154,49 @@ describe('when a route is registered through better-fastify-405', function (){
 })
 
 describe('when a route is registered through better-fastify-405', function (){
-	describe('when a custom callback is used to filter out methods', function (){
-		describe('when a route is accessed with a filter out method', function (){
-			it('should not return 405', async function (){
+	describe('when a custom callback is used to filter out a route', function (){
+		describe('when the route is accessed', function (){
+			const app: FastifyInstance = fastify({
+				logger: false
+			})
 
+			app.register(fastify405, {
+				routes: [
+					async function routes(
+						instance: FastifyInstance,
+						options: FastifyPluginOptions
+					) {
+						instance.get(
+							'/',
+							async (request: FastifyRequest, reply: FastifyReply) => {
+								return { hello: 'world' }
+							}
+						)
+					}
+				],
+				filterCallback: ({ route, method }) => {
+					return route !== '/'
+				}
+			})
+			it('should not return 405', async function (){
+				const postResponse = await app.inject({
+					method: 'POST',
+					url: '/'
+				})
+
+				const deleteResponse = await app.inject({
+					method: 'DELETE',
+					url: '/'
+				})
+
+				const optionsResponse = await app.inject({
+					method: 'OPTIONS',
+					url: '/'
+				})
+
+				expect(postResponse.statusCode).toBe(404)
+				expect(deleteResponse.statusCode).toBe(404)
+				expect(optionsResponse.statusCode).toBe(404)
 			})
 		})
 	})

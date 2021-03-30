@@ -62,6 +62,11 @@ export default fp(plugin, {
   name: "better-fastify-405"
 });
 
-export function allowCORS({ route, method }){
+interface IAllowCORS {
+  route: string,
+  method: string
+}
+
+export function allowCORS({ route, method }: IAllowCORS){
   return method !== 'OPTIONS'
 }

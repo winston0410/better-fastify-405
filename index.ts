@@ -39,7 +39,12 @@ async function plugin(
   for (const route in routes) {
     const methods = [...routes[route]]
     fastify.route({
-      method: HTTP_METHODS.filter(v => ! methods.includes(v)),
+      method: HTTP_METHODS
+        .filter((v) => ! methods.includes(v))
+        .filter((v) => (opts.filterCallback)
+          ? opts.filterCallback({ route, method: v })
+          : true
+        ),
       url: route,
       handler: async (request, reply) => {
         reply

@@ -12,7 +12,7 @@ describe('when no routes is registered through better-fastify-405', function (){
 		const app: FastifyInstance = fastify({
 			logger: false
 		})
-		
+
 		const addHookMock = jest.spyOn(app, 'addHook');
 
 		app.register(fastify405)
@@ -113,5 +113,52 @@ describe('when a route is registered through better-fastify-405', function() {
 
       expect(response.body).toBe('')
     })
+	})
+})
+
+describe('when a route is registered through better-fastify-405', function (){
+	describe('when a custom callback is used to filter out a route', function (){
+		describe('when the route is accessed', function (){
+			const app: FastifyInstance = fastify({
+				logger: false
+			})
+
+			app.register(fastify405, {
+				routes: [
+					async function routes(
+						instance: FastifyInstance,
+						options: FastifyPluginOptions
+					) {
+						instance.get(
+							'/',
+							async (request: FastifyRequest, reply: FastifyReply) => {
+								return { hello: 'world' }
+							}
+						)
+					}
+				],
+				filterCallback: ({ route, method }) => {
+					return method !== 'POST'
+				}
+			})
+			it('should not return 405', async function (){
+				const response = await app.inject({
+					method: 'POST',
+					url: '/'
+				})
+
+				expect(response.statusCode).toBe(404)
+			})
+		})
+	})
+})
+
+describe('when a route is registered through better-fastify-405', function (){
+	describe('when a custom callback is used to filter out methods', function (){
+		describe('when a route is accessed with a filter out method', function (){
+			it('should not return 405', async function (){
+
+			})
+		})
 	})
 })

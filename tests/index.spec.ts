@@ -5,7 +5,7 @@ import fastify, {
 	FastifyRequest,
 	FastifyReply
 } from 'fastify'
-import fastify405 from '../index'
+import fastify405, { allowCORS } from '../index'
 
 describe('when no routes is registered through better-fastify-405', function (){
 	it('should return early and become a noop', function (){
@@ -196,6 +196,52 @@ describe('when a route is registered through better-fastify-405', function (){
 
 				expect(postResponse.statusCode).toBe(404)
 				expect(deleteResponse.statusCode).toBe(404)
+				expect(optionsResponse.statusCode).toBe(404)
+			})
+		})
+	})
+})
+
+describe('when a route is registered through better-fastify-405', function (){
+	describe('when a allowCORS is used to filter out all OPTIONS method for 405', function (){
+		const app: FastifyInstance = fastify({
+			logger: false
+		})
+
+		app.register(fastify405, {
+			routes: [
+				async function routes(
+					instance: FastifyInstance,
+					options: FastifyPluginOptions
+				) {
+					instance.get(
+						'/',
+						async (request: FastifyRequest, reply: FastifyReply) => {
+							return { hello: 'world' }
+						}
+					)
+				}
+			],
+			filterCallback: allowCORS
+		})
+
+		describe('when the route is accessed with method other than OPTIONS', function (){
+			it('should return 405', async function (){
+				const postResponse = await app.inject({
+					method: 'POST',
+					url: '/'
+				})
+
+				expect(postResponse.statusCode).toBe(405)
+			})
+		})
+
+		describe('when the route is accessed with OPTIONS', function (){
+			it('should not return 405', async function (){
+				const optionsResponse = await app.inject({
+					method: 'OPTIONS',
+					url: '/'
+				})
 				expect(optionsResponse.statusCode).toBe(404)
 			})
 		})

@@ -61,3 +61,7 @@ export default fp(plugin, {
   fastify: "^3.2.0",
   name: "better-fastify-405"
 });
+
+export function allowCORS({ route, method }){
+  return method !== 'OPTIONS'
+}
